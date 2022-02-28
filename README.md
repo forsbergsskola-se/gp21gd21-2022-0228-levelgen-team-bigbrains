@@ -10,7 +10,7 @@
 - Harry Heath
 - Max Deurell Kent
 - Nadia Dahlberg
-- Naomi Roukamo
+- Naomi Ruokamo
 - Sami Olsson
 - Sear Waizy
 - Victor Petterson
