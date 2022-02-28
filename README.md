@@ -12,7 +12,7 @@
 - Nadia Dahlberg
 - Naomi Roukamo
 - Sami Olsson
-- Sear Waizky
+- Sear Waizy
 - Victor Petterson
 
 Feel free to link any existing Linked.in Profiles or Portfolio Websites.
