@@ -1,12 +1,19 @@
-# {game-title}
+### Untitled Big Brains Project
 
 {video}
 
 {description}
 
-## Team Name
+### Big Brains
 
-{team members and roles}
+- Efraim Kent
+- Harry Heath
+- Max Deurell Kent
+- Nadia Dahlberg
+- Naomi Roukamo
+- Sami Olsson
+- Sear Waizky
+- Victor Petterson
 
 Feel free to link any existing Linked.in Profiles or Portfolio Websites.
 
