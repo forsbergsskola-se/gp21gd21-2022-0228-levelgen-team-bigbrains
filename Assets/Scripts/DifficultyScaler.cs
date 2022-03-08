@@ -26,10 +26,16 @@ public class DifficultyScaler : MonoBehaviour
 
         // do stuff like this to keep more difficult enemy amount down
         // e.g 4 roomsCleared = 2, 5 RoomsCleared = 2, 6 RoomsCleared = 3 (or 2 if floored from 2.5), 7 rooms = 3
-        int Half = (int) (RoomsCleared /2 - 0.5f);
+        int Half =+ (int) (RoomsCleared /2 - 0.5f);
         Enemy3Count =+ Half;
 
         // even smaller amount
-        Enemy4Count = (int )+(Half / 2 - 0.5f);
+        Enemy4Count =+ (int) (Half / 2 - 0.5f);
+
+        
+        Debug.Log($"{Enemy1Count}");
+        Debug.Log($"{Enemy2Count}");
+        Debug.Log($"{Enemy3Count}");
+        Debug.Log($"{Enemy4Count}");
     }
 }
