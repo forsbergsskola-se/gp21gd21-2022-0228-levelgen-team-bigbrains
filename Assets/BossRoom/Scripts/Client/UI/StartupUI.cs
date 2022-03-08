@@ -10,7 +10,7 @@ namespace Unity.Multiplayer.Samples.BossRoom.Client
     {
         void Start()
         {
-            SceneManager.LoadScene("TestScene");
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }
