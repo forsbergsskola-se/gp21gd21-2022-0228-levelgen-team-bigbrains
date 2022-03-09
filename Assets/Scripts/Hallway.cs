@@ -1,12 +1,10 @@
 using UnityEngine;
 
-public class Hallway : MonoBehaviour
-{
-
+public class Hallway : MonoBehaviour {
     /// <summary>
     /// this script handles the connecting hallways, it triggers difficulty scaling up and gets rooms ready/ or makes them idle
+    /// not used right now
     /// </summary>
-
 
     private void OnCollisionEnter(Collision collision)
     {

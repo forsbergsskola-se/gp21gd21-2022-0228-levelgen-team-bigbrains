@@ -7,8 +7,9 @@ public class RoomExit : MonoBehaviour {
 
     private DifficultyScaler difficultyScaler;
     private RoomGenerator roomGenerator;
+    private FogGate fogGate;
 
-    private void OnCollisionEnter(Collision collision) {
+    public void OnCollisionEnter(Collision collision) {
         if (!collision.gameObject.CompareTag("Player")) return;
 
         var room = gameObject.GetComponentInParent<Spawner>();
@@ -25,15 +26,8 @@ public class RoomExit : MonoBehaviour {
             difficultyScaler = FindObjectOfType<DifficultyScaler>().GetComponent<DifficultyScaler>();
             difficultyScaler.ScaleDifficultyUp();
 
-            // Execute FogGate disabled logic for roomExit
+            fogGate = FindObjectOfType<FogGate>().GetComponent<FogGate>();
+            fogGate.DisableFogGate();
         }
-    }
-
-    private void OnCollisionExit(Collision other)
-    {
-        // Only execute if Player
-        if (!other.gameObject.CompareTag("Player")) return;
-
-        // Execute FogGate re-enabled logic for roomExit
     }
 }
