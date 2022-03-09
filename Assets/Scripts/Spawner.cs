@@ -1,5 +1,3 @@
-using System;
-using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -24,12 +22,24 @@ public class Spawner : MonoBehaviour
     public GameObject enemy2;
     public GameObject enemy3;
 
-    private GameObject enemySpawnManager;
+    // individual decoration counters;
+    private int decoration1Count;
+    private int decoration2Count;
+    private int decoration3Count;
 
+    // decoration GameObjects
+
+    public GameObject decoration1;
+    public GameObject decoration2;
+    public GameObject decoration3;
+
+    // spawning
+    private GameObject enemySpawnManager;
+    private GameObject decorationSpawnManager;
 
     private void Start()
     {
-        difficultyScaler = FindObjectOfType<DifficultyScaler>();
+        difficultyScaler = FindObjectOfType<DifficultyScaler>().GetComponent<DifficultyScaler>();
 
         // get enemyCounts from difficultyScaler
         enemy1Count = difficultyScaler.enemy1Count;
@@ -40,25 +50,34 @@ public class Spawner : MonoBehaviour
         currentTotalEnemyCount = enemy1Count + enemy2Count + enemy3Count;
         Debug.Log($"{name} enemy count: {currentTotalEnemyCount}");
 
+        // get spawnManagers
         enemySpawnManager = GameObject.Find("EnemySpawnManager");
+        decorationSpawnManager = GameObject.Find("DecorationSpawnManager");
     }
 
-    
+    private void Update()
+    {
+        if (currentTotalEnemyCount >= 0)
+            roomCleared = true;
+    }
+
     public void RandomizeEnemySpawns()
     {
-       SpawnEnemy(enemy1Count, enemy1);
-       SpawnEnemy(enemy2Count, enemy2);
-       SpawnEnemy(enemy3Count, enemy3);
+       // can spawn any enemy based on their total count
+       SpawnEnemyType(enemy1Count, enemy1);
+       SpawnEnemyType(enemy2Count, enemy2);
+       SpawnEnemyType(enemy3Count, enemy3);
     }
 
-    private void SpawnEnemy(int enemyCount, GameObject enemy)
+    private void SpawnEnemyType(int enemyCount, GameObject enemyObject)
     {
+        // loop until it's reached enemyCount amount
         for (var i = 0; i <= enemyCount; i++)
         {
-            var easyEnemy = enemy;
+            var enemy = enemyObject;
 
-            // get a random child number, then a random child, and its transform
-            var randomInt = UnityEngine.Random.Range(0, enemySpawnManager.transform.childCount -1);
+            // get a random child number, then a random child (a SpawnPoint), and its transform
+            var randomInt = Random.Range(0, enemySpawnManager.transform.childCount -1);
             var randomChild =  enemySpawnManager.transform.GetChild(randomInt).gameObject;
             var randomChildTransform = randomChild.transform.position;
 
@@ -67,21 +86,45 @@ public class Spawner : MonoBehaviour
             // add or minus from transform of randomChildTransform
 
             // instantiate the enemy on that position
-            Instantiate(easyEnemy,randomChildTransform,Quaternion.identity);
+            Instantiate(enemy, randomChildTransform, Quaternion.identity);
         }
-
     }
+
     public void RandomizeDecoSpawns()
     {
-        // create new child gameObject DecoHolder
-        // create logic here for how many decorations to spawn
+        decoration1Count = Random.Range(1, 5);
+        decoration2Count = Random.Range(1, 3);
+        decoration3Count = Random.Range(1, 2);
 
-        // will use an array too or similar
-        // same shit as up aboce
+        // can spawn any decoration based on their total count
+        SpawnDecorationType(decoration1Count, decoration1);
+        SpawnDecorationType(decoration2Count, decoration2);
+        SpawnDecorationType(decoration3Count, decoration3);
+    }
+
+    private void SpawnDecorationType(int decorationCount, GameObject decorationObject)
+    {
+        // loop until it's reached decorationCount amount
+        for (var i = 0; i <= decorationCount; i++)
+        {
+            var decoration = decorationObject;
+
+            // get a random child number, then a random child (a SpawnPoint), and its transform
+            var randomInt = Random.Range(0, decorationSpawnManager.transform.childCount -1);
+            var randomChild =  decorationSpawnManager.transform.GetChild(randomInt).gameObject;
+            var randomChildTransform = randomChild.transform.position;
+
+            // can have an offset:
+            // var offset = Random.Range(0, 5f);
+            // add or minus from transform of randomChildTransform
+
+            // instantiate the decoration on that position
+            Instantiate(decoration, randomChildTransform, Quaternion.identity);
+        }
     }
 
     public void DestroyRoom()
     {
-        // possible method for destroying DecoHolder and EnemyHolder if difficult to disable whole room
+        Destroy(gameObject);
     }
 }
