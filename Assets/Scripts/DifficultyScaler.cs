@@ -17,7 +17,9 @@ public class DifficultyScaler : MonoBehaviour {
         roomsClearedTotal = 0;
     }
 
-    private void ScaleDifficultyUp() {
+    public void ScaleDifficultyUp() {
+        roomsClearedTotal++;
+
         double half = roomsClearedTotal / 2;
         int halfFloored = Convert.ToInt32(Math.Floor(half));
         double sqrt = Math.Sqrt(roomsClearedTotal);
@@ -27,10 +29,5 @@ public class DifficultyScaler : MonoBehaviour {
         enemy2Count += roomsClearedTotal;
         enemy3Count += halfFloored;
         enemy4Count += sqrtFloored;
-
-        // Debug.Log($"{enemy1Count}");
-        // Debug.Log($"{enemy2Count}");
-        // Debug.Log($"{enemy3Count}");
-        // Debug.Log($"{enemy4Count}");
     }
 }

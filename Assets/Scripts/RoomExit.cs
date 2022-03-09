@@ -1,37 +1,32 @@
 using UnityEngine;
 
-public class RoomExit : MonoBehaviour
-{
-
-
+public class RoomExit : MonoBehaviour {
     /// <summary>
     /// this script is placed on an empty gameObject at every room exit. It decides if the player can exit or not
     /// </summary>
 
+    private DifficultyScaler difficultyScaler;
+    private RoomGenerator roomGenerator;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        // Only execute if Player
+    private void OnCollisionEnter(Collision collision) {
         if (!collision.gameObject.CompareTag("Player")) return;
-
 
         var room = gameObject.GetComponentInParent<Spawner>();
 
-        if (room.enemyCount == 0)
-            room.roomCleared = true;
+        if (room.currentTotalEnemyCount == 0) {
+            //supposed to destroy the previous room, not current
+            room.DestroyRoom();
+            //create next room
+            roomGenerator = FindObjectOfType<RoomGenerator>().GetComponent<RoomGenerator>();
+            roomGenerator.GenerateNewRoom();
+            //fill up the next room
+            room.RandomizeEnemySpawns();
 
-        if (room.roomCleared)
-        {
-            // Execute RoomCleared method in Room.cs
-            // Execute Room & Hallway gen logic - have room and Hallways together as one prefab
-            // Execute Room Enemy and Deco spawns logic
+            difficultyScaler = FindObjectOfType<DifficultyScaler>().GetComponent<DifficultyScaler>();
+            difficultyScaler.ScaleDifficultyUp();
+
             // Execute FogGate disabled logic for roomExit
-
-
-
-            // tell DifficultyScaler =+1 roomsClearedTotal
         }
-
     }
 
     private void OnCollisionExit(Collision other)
