@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
     private DifficultyScaler difficultyScaler;
     public int currentTotalEnemyCount;
     public bool roomCleared = false;
+    public bool readyToBeDestroyed = false;
 
     // individual enemy counters
     private int enemy1Count;
@@ -53,12 +54,21 @@ public class Spawner : MonoBehaviour
         // get spawnManagers
         enemySpawnManager = GameObject.Find("EnemySpawnManager");
         decorationSpawnManager = GameObject.Find("DecorationSpawnManager");
+
+        // spawn enemies and decorations
+        RandomizeEnemySpawns();
+        RandomizeDecoSpawns();
     }
 
     private void Update()
     {
-        if (currentTotalEnemyCount >= 0)
+        if (currentTotalEnemyCount !>= 0) return;
+
+        if (!roomCleared)
             roomCleared = true;
+
+        if (roomCleared)
+            readyToBeDestroyed = true;
     }
 
     public void RandomizeEnemySpawns()
@@ -125,6 +135,7 @@ public class Spawner : MonoBehaviour
 
     public void DestroyRoom()
     {
-        Destroy(gameObject);
+        if (readyToBeDestroyed)
+            Destroy(gameObject);
     }
 }
