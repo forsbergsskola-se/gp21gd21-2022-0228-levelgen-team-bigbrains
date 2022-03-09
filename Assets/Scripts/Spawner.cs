@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     /// </summary>
 
 
-    [SerializeField] public int enemyCount;
+    [SerializeField] public int currentTotalEnemyCount;
     [SerializeField] public bool roomCleared = false;
 
     // individual enemy counters
@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
 
 
 
-    private void RandomizeEnemySpawns()
+    public void RandomizeEnemySpawns()
     {
         // create new child gameObject EnemyHolder
         // find all the SpawnPoints by looking for objects with SpawnPoint tag in Child
@@ -49,7 +49,7 @@ public class Spawner : MonoBehaviour
 
     }
 
-    private void RandomizeDecoSpawns()
+    public void RandomizeDecoSpawns()
     {
         // create new child gameObject DecoHolder
         // create logic here for how many decorations to spawn
@@ -60,7 +60,7 @@ public class Spawner : MonoBehaviour
 
     }
 
-    private void ClearRoom()
+    public void ClearRoom()
     {
         // possible method for destroying DecoHolder and EnemyHolder if difficult to disable whole room
     }
