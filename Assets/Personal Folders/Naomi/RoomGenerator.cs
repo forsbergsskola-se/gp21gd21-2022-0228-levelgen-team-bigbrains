@@ -9,7 +9,7 @@ public class RoomGenerator : MonoBehaviour
     private RoomTemplates rooms;
     private int rand;
 
-    // this simple script 
+    // this is a simple script to spawn a room
 
     public void Start()
     {
