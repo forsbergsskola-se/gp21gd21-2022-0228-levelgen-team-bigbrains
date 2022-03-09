@@ -15,7 +15,7 @@ public class RoomExit : MonoBehaviour
         if (!collision.gameObject.CompareTag("Player")) return;
 
 
-        var room = gameObject.GetComponentInParent<Room>();
+        var room = gameObject.GetComponentInParent<Spawner>();
 
         if (room.enemyCount == 0)
             room.roomCleared = true;
@@ -23,9 +23,13 @@ public class RoomExit : MonoBehaviour
         if (room.roomCleared)
         {
             // Execute RoomCleared method in Room.cs
-            // Execute Room & Hallway gen logic
+            // Execute Room & Hallway gen logic - have room and Hallways together as one prefab
             // Execute Room Enemy and Deco spawns logic
             // Execute FogGate disabled logic for roomExit
+
+
+
+            // tell DifficultyScaler =+1 roomsClearedTotal
         }
 
     }
