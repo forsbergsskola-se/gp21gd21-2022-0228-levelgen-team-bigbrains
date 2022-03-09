@@ -43,58 +43,44 @@ public class Spawner : MonoBehaviour
         enemySpawnManager = GameObject.Find("EnemySpawnManager");
     }
 
-
-
-    private void RandomizeEnemySpawns()
+    
+    public void RandomizeEnemySpawns()
     {
-        // maybe use a forEach to get each spawner
-        enemySpawnManager.GetComponentsInChildren<GameObject>();
+       SpawnEnemy(enemy1Count, enemy1);
+       SpawnEnemy(enemy2Count, enemy2);
+       SpawnEnemy(enemy3Count, enemy3);
+    }
 
-        for (var i = 0; i <= enemy1Count; i++)
+    private void SpawnEnemy(int enemyCount, GameObject enemy)
+    {
+        for (var i = 0; i <= enemyCount; i++)
         {
-            var easyEnemy = enemy1;
+            var easyEnemy = enemy;
 
             // get a random child number, then a random child, and its transform
             var randomInt = UnityEngine.Random.Range(0, enemySpawnManager.transform.childCount -1);
             var randomChild =  enemySpawnManager.transform.GetChild(randomInt).gameObject;
             var randomChildTransform = randomChild.transform.position;
 
+            // can have an offset:
+            // var offset = Random.Range(0, 5f);
+            // add or minus from transform of randomChildTransform
+
             // instantiate the enemy on that position
             Instantiate(easyEnemy,randomChildTransform,Quaternion.identity);
         }
 
-        for (var i = 0; i <= enemy2Count; i++)
-        {
-
-        }
-
-        for (var i = 0; i <= enemy3Count; i++)
-        {
-
-        }
-        // create new child gameObject EnemyHolder
-        // find all the SpawnPoints by looking for objects with SpawnPoint tag in Child
-        // have an array or similar of enemySpawnPoints gameObjects (these are empty)
-
-        // randomRange for spawns points
-        // these spawnPoints feed a transform location for the enemies to spawn onto
-        // probably best to have an offset, xTransform.Position randomRange(0, 10) to not have overlaps
-        // randomize where each enemy is spawned - so not everyone goes to this or that enemySpawnPoint
     }
-
-
-    private void RandomizeDecoSpawns()
+    public void RandomizeDecoSpawns()
     {
         // create new child gameObject DecoHolder
         // create logic here for how many decorations to spawn
 
         // will use an array too or similar
         // same shit as up aboce
-
-
     }
 
-    public void ClearRoom()
+    public void DestroyRoom()
     {
         // possible method for destroying DecoHolder and EnemyHolder if difficult to disable whole room
     }
