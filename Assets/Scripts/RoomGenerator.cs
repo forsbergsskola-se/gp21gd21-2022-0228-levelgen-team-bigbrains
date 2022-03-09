@@ -11,7 +11,7 @@ public class RoomGenerator : MonoBehaviour
 
     public void Start()
     {
-        rooms = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+        rooms = GameObject.FindGameObjectWithTag("RoomsTemplates").GetComponent<RoomTemplates>();
     }
 
     public void GenerateNewRoom()
