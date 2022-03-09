@@ -7,6 +7,7 @@ public class RoomGenerator : MonoBehaviour
     private int rand;
 
     // this is a simple script to spawn a room
+    // might need to add some rotation logic if the rooms are overlapping to make sure the openings are aligning properly?
 
     public void Start()
     {
