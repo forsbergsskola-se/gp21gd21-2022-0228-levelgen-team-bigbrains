@@ -6,7 +6,7 @@ public class DifficultyScaler : MonoBehaviour {
     /// this script goes on an empty DifficultyManager object and increments the hordes of enemies based on roomsCleared
     /// </summary>
 
-    public int enemy1Count = 4;
+    public int enemy1Count;
     public int enemy2Count;
     public int enemy3Count;
     public int enemy4Count;
