@@ -62,7 +62,7 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        if (currentTotalEnemyCount !>= 0) return;
+        if (currentTotalEnemyCount != 0) return;
 
         if (!roomCleared)
             roomCleared = true;
