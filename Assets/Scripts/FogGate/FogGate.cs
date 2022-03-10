@@ -7,13 +7,24 @@ public class FogGate : MonoBehaviour {
 
     public BoxCollider invisibleWall;
     public ParticleSystemRenderer fogParticleEffect;
+    private DifficultyScaler difficultyScaler;
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
-        Debug.Log("Disable FogGate");
+        var room = gameObject.GetComponentInParent<Spawner>();
 
-        DisableFogGate();
+        if (room.currentTotalEnemyCount == 0) {
+
+            // destroys any previous rooms that are ready to be destroyed
+            room.DestroyRoom();
+
+
+            difficultyScaler = FindObjectOfType<DifficultyScaler>().GetComponent<DifficultyScaler>();
+            difficultyScaler.ScaleDifficultyUp();
+            DisableFogGate();
+        }
     }
 
     public void DisableFogGate()
