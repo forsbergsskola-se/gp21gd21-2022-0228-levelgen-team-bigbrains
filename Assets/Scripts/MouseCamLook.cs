@@ -20,7 +20,7 @@ public class MouseCamLook : MonoBehaviour
         character = this.transform.parent.gameObject;
     }
 
-    // Update is called once per frame
+
     void Update () {
 
         var md = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
