@@ -143,7 +143,7 @@ namespace Unity.Multiplayer.Samples.BossRoom.Server
 
         private IEnumerator WaitToEndLobby()
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1);
             NetworkManager.SceneManager.LoadScene("BossRoom", LoadSceneMode.Single);
         }
 
