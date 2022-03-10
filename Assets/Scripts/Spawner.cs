@@ -56,8 +56,7 @@ public class Spawner : MonoBehaviour
         decorationSpawnManager = GameObject.Find("DecorationSpawnManager");
 
         // spawn enemies and decorations
-        RandomizeEnemySpawns();
-        RandomizeDecoSpawns();
+        //RandomizeEnemySpawns();
     }
 
     private void Update()
