@@ -26,7 +26,7 @@ public class RoomExit : MonoBehaviour {
             difficultyScaler = FindObjectOfType<DifficultyScaler>().GetComponent<DifficultyScaler>();
             difficultyScaler.ScaleDifficultyUp();
 
-            fogGate = FindObjectOfType<FogGate>().GetComponent<FogGate>();
+            fogGate = gameObject.GetComponentInChildren<FogGate>();
             fogGate.DisableFogGate();
         }
     }
