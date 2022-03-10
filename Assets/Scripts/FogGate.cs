@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class FogGate : MonoBehaviour {
@@ -8,13 +9,21 @@ public class FogGate : MonoBehaviour {
     public BoxCollider invisibleWall;
     public ParticleSystemRenderer fogParticleEffect;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.CompareTag("Player")) return;
+        Debug.Log("Disable FogGate");
+
+        DisableFogGate();
+    }
+
     public void DisableFogGate()
     {
         invisibleWall.enabled = false;
         fogParticleEffect.enabled = false;
     }
 
-    private void OnCollisionExit(Collision other)
+    private void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
         EnableFogGate();
