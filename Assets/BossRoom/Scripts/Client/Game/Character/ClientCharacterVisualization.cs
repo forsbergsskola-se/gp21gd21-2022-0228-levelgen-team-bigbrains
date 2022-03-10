@@ -240,6 +240,7 @@ namespace Unity.Multiplayer.Samples.BossRoom.Visual
         {
             if (Parent == null)
             {
+                // GetComponent<NetworkObject>().Spawn();
                 // since we aren't in the transform hierarchy, we have to explicitly die when our parent dies.
                 Destroy(gameObject);
                 return;
