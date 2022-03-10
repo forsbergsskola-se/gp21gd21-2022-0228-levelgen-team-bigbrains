@@ -9,12 +9,10 @@ public class RoomDespawner : MonoBehaviour
         // cycle through each individual room
         foreach (var component in rooms2)
         {
-            // destroy rooms that are ready to be destroyed
-            if (component.GetComponent<Spawner>().readyToBeDestroyed)
-            {
-                Destroy(gameObject);
-                Debug.Log($"{this.name} was deleted");
-            }
+            // continue and destroy rooms only when they are ready to be destroyed
+            if (component.GetComponent<Spawner>().readyToBeDestroyed == false) return;
+            Destroy(gameObject);
+            Debug.Log($"{this.name} was deleted");
         }
     }
 
