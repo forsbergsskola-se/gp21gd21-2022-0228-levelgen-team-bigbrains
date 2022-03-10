@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour {
     private void OnDeath() {
         spawner = FindObjectOfType<Spawner>().GetComponent<Spawner>();
         spawner.currentTotalEnemyCount--;
+
+        Destroy(gameObject);
     }
 
 }
