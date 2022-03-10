@@ -24,19 +24,19 @@ public class Spawner : MonoBehaviour
     public GameObject enemy3;
 
     // individual decoration counters;
-    private int decoration1Count;
-    private int decoration2Count;
-    private int decoration3Count;
+   // private int decoration1Count;
+    //private int decoration2Count;
+   // private int decoration3Count;
 
     // decoration GameObjects
 
-    public GameObject decoration1;
-    public GameObject decoration2;
-    public GameObject decoration3;
+    //public GameObject decoration1;
+   // public GameObject decoration2;
+   // public GameObject decoration3;
 
     // spawning
     private GameObject enemySpawnManager;
-    private GameObject decorationSpawnManager;
+   // private GameObject decorationSpawnManager;
 
     private void Start()
     {
@@ -53,10 +53,10 @@ public class Spawner : MonoBehaviour
 
         // get spawnManagers
         enemySpawnManager = GameObject.Find("EnemySpawnManager");
-        decorationSpawnManager = GameObject.Find("DecorationSpawnManager");
+       // decorationSpawnManager = GameObject.Find("DecorationSpawnManager");
 
         // spawn enemies and decorations
-        //RandomizeEnemySpawns();
+        RandomizeEnemySpawns();
     }
 
     private void Update()
@@ -99,38 +99,38 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public void RandomizeDecoSpawns()
-    {
-        decoration1Count = Random.Range(1, 5);
-        decoration2Count = Random.Range(1, 3);
-        decoration3Count = Random.Range(1, 2);
+   // public void RandomizeDecoSpawns()
+    //{
+        //decoration1Count = Random.Range(1, 5);
+       // decoration2Count = Random.Range(1, 3);
+        //decoration3Count = Random.Range(1, 2);
 
         // can spawn any decoration based on their total count
-        SpawnDecorationType(decoration1Count, decoration1);
-        SpawnDecorationType(decoration2Count, decoration2);
-        SpawnDecorationType(decoration3Count, decoration3);
-    }
+        //SpawnDecorationType(decoration1Count, decoration1);
+       // SpawnDecorationType(decoration2Count, decoration2);
+        //SpawnDecorationType(decoration3Count, decoration3);
+    //}
 
-    private void SpawnDecorationType(int decorationCount, GameObject decorationObject)
-    {
+   // private void SpawnDecorationType(int decorationCount, GameObject decorationObject)
+   // {
         // loop until it's reached decorationCount amount
-        for (var i = 0; i <= decorationCount; i++)
-        {
-            var decoration = decorationObject;
+       // for (var i = 0; i <= decorationCount; i++)
+       // {
+           // var decoration = decorationObject;
 
             // get a random child number, then a random child (a SpawnPoint), and its transform
-            var randomInt = Random.Range(0, decorationSpawnManager.transform.childCount -1);
-            var randomChild =  decorationSpawnManager.transform.GetChild(randomInt).gameObject;
-            var randomChildTransform = randomChild.transform.position;
+           // var randomInt = Random.Range(0, decorationSpawnManager.transform.childCount -1);
+           // var randomChild =  decorationSpawnManager.transform.GetChild(randomInt).gameObject;
+           // var randomChildTransform = randomChild.transform.position;
 
             // can have an offset:
             // var offset = Random.Range(0, 5f);
             // add or minus from transform of randomChildTransform
 
             // instantiate the decoration on that position
-            Instantiate(decoration, randomChildTransform, Quaternion.identity);
-        }
-    }
+           // Instantiate(decoration, randomChildTransform, Quaternion.identity);
+       // }
+    //}
 
     public void DestroyRoom()
     {

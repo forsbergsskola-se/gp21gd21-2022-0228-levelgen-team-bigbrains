@@ -22,7 +22,7 @@ public class FirstPersonMove : MonoBehaviour
         straffe = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         transform.Translate(straffe, 0, translation);
 
-        if (Input.GetKeyDown("escape")) {
+       if (Input.GetKeyDown("escape")) {
             // turn on the cursor
             Cursor.lockState = CursorLockMode.None;
         }
