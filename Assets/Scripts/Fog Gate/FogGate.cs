@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using UnityEngine;
 
 public class FogGate : MonoBehaviour {
@@ -8,6 +10,13 @@ public class FogGate : MonoBehaviour {
     public BoxCollider invisibleWall;
     public ParticleSystemRenderer fogParticleEffect;
     private DifficultyScaler difficultyScaler;
+    public GameObject doorText;
+    [HideInInspector] public TMP_Text tmp;
+
+    private void Awake()
+    {
+        tmp = doorText.GetComponent<TMP_Text>();
+    }
 
 
     private void OnTriggerEnter(Collider other)
