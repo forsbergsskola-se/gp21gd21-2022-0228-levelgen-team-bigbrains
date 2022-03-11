@@ -106,9 +106,11 @@ public class EnemySpawner : MonoBehaviour
 
     public void DestroyRoom()
     {
-        // starts countdown to destroy room if it's cleared
         if (readyToBeDestroyed)
-            StartCoroutine(WaitToDestroy());
+            Destroy(gameObject);
+
+        // starts countdown to destroy room if it's cleared
+        //StartCoroutine(WaitToDestroy());
     }
 
     private IEnumerator WaitToDestroy()
