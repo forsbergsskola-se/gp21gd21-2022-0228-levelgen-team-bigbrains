@@ -29,10 +29,11 @@ public class Enemy : MonoBehaviour {
     }
 
     private void OnDeath() {
-        Debug.Log($"{this} died");
 
         spawner = FindObjectOfType<Spawner>().GetComponent<Spawner>();
-        spawner.currentTotalEnemyCount--;
+        spawner.CheckIfCleared();
+
+        //spawner.currentTotalEnemyCount--;
     }
 
 }
