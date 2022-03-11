@@ -79,7 +79,7 @@ public class EnemySpawner : MonoBehaviour
             // create and add random offsets to x and z values
             var offset = Random.Range(-3f, 3f);
             var offset2 = Random.Range(-3f, 3f);
-            var randomOffset = new Vector3(randomChildTransform.x + offset, randomChildTransform.y + 0.95f, randomChildTransform.z + offset2);
+            var randomOffset = new Vector3(randomChildTransform.x + offset, randomChildTransform.y + 1.7f, randomChildTransform.z + offset2);
 
             // instantiate the enemy on that position
             Instantiate(enemy, randomOffset, Quaternion.identity);
