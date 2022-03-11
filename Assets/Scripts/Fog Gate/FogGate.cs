@@ -13,9 +13,16 @@ public class FogGate : MonoBehaviour {
     public GameObject doorText;
     [HideInInspector] public TMP_Text tmp;
 
+    private RoomGenerator roomGenerator;
+    public GameObject spawnPoint;
+    private Vector3 spawnPos;
+
+
     private void Awake()
     {
         tmp = doorText.GetComponent<TMP_Text>();
+        roomGenerator = FindObjectOfType<RoomGenerator>().GetComponent<RoomGenerator>();
+        spawnPos = spawnPoint.transform.position;
     }
 
 
@@ -30,7 +37,8 @@ public class FogGate : MonoBehaviour {
             room.DestroyRoom();
 
 
-            // use room Gen logic here from RoomExit.cs
+            roomGenerator.GenerateNewRoom(spawnPos);
+
 
 
             difficultyScaler = FindObjectOfType<DifficultyScaler>().GetComponent<DifficultyScaler>();
