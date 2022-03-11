@@ -27,8 +27,8 @@ public class FirstPersonMove : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             running = true;
-            translation = translation* 2;
-            straffe = straffe * 2;
+            translation = translation*3;
+            straffe = straffe*3;
         }
         else
         {
