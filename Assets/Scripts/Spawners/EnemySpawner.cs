@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemy2;
     public GameObject enemy3;
 
-    private GameObject enemySpawnManager;
+    public GameObject enemySpawnManager;
 
     private void Start()
     {
@@ -35,8 +35,6 @@ public class EnemySpawner : MonoBehaviour
         enemy2Count = difficultyScaler.enemy2Count;
         enemy3Count = difficultyScaler.enemy3Count;
 
-        // get spawnManager
-        enemySpawnManager = GameObject.Find("EnemySpawnManager");
 
         // spawn enemies
         RandomizeEnemySpawns();
