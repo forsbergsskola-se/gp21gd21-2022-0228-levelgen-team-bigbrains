@@ -31,15 +31,9 @@ public class FogGate : MonoBehaviour {
         if (!other.gameObject.CompareTag("Player")) return;
         var room = gameObject.GetComponentInParent<EnemySpawner>();
 
-        if (room.currentTotalEnemyCount <= 0) {
-
-            // destroys any previous rooms that are ready to be destroyed
-            room.DestroyRoom();
-
-
+        if (room.currentTotalEnemyCount <= 0)
+        {
             roomGenerator.GenerateNewRoom(spawnPos);
-
-
 
             difficultyScaler = FindObjectOfType<DifficultyScaler>().GetComponent<DifficultyScaler>();
             difficultyScaler.ScaleDifficultyUp();
