@@ -47,6 +47,14 @@ public class EnemySpawner : MonoBehaviour
         // check current enemy count by doing a tag count
         currentTotalEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
 
+        // update each fogGateText with enemyCount
+        var fogGates = gameObject.GetComponentsInChildren(typeof(FogGate));
+        foreach (var fogGate in fogGates)
+        {
+            var doorText = fogGate.GetComponent<FogGate>().tmp;
+            doorText.text = currentTotalEnemyCount > 0 ? $"{currentTotalEnemyCount}" : "";
+        }
+
         // room cleared logic
         if (currentTotalEnemyCount !<= 0)
             roomCleared = false;
