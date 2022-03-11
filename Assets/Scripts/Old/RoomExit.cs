@@ -12,7 +12,7 @@ public class RoomExit : MonoBehaviour {
     public void OnCollisionEnter(Collision collision) {
         if (!collision.gameObject.CompareTag("Player")) return;
 
-        var room = gameObject.GetComponentInParent<Spawner>();
+        var room = gameObject.GetComponentInParent<EnemySpawner>();
 
         if (room.currentTotalEnemyCount == 0) {
             //supposed to destroy the previous room, not current

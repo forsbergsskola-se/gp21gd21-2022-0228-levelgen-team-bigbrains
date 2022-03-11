@@ -13,7 +13,7 @@ public class FogGate : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
-        var room = gameObject.GetComponentInParent<Spawner>();
+        var room = gameObject.GetComponentInParent<EnemySpawner>();
 
         if (room.currentTotalEnemyCount <= 0) {
 

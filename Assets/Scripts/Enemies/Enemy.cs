@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour {
     /// this script goes on each Enemy and monitors enemy logic
     /// </summary>
 
-    private Spawner spawner;
+    private EnemySpawner spawner;
 
     // private void Awake() {
     //     GetComponent<NetworkLifeState>().LifeState.OnValueChanged += OnValueChanged;
@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour {
 
     private void OnDeath() {
 
-        spawner = FindObjectOfType<Spawner>().GetComponent<Spawner>();
+        spawner = FindObjectOfType<EnemySpawner>().GetComponent<EnemySpawner>();
         spawner.CheckIfCleared();
 
         //spawner.currentTotalEnemyCount--;

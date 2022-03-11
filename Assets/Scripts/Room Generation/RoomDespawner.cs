@@ -5,12 +5,12 @@ public class RoomDespawner : MonoBehaviour
     private void Update()
     {
         // get every room via its Spawner component
-        var rooms2 = gameObject.GetComponents(typeof(Spawner));
+        var rooms2 = gameObject.GetComponents(typeof(EnemySpawner));
         // cycle through each individual room
         foreach (var component in rooms2)
         {
             // continue and destroy rooms only when they are ready to be destroyed
-            if (component.GetComponent<Spawner>().readyToBeDestroyed == false) return;
+            if (component.GetComponent<EnemySpawner>().readyToBeDestroyed == false) return;
             Destroy(gameObject);
             Debug.Log($"{this.name} was deleted");
         }
