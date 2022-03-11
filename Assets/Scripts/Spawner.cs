@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,20 +24,7 @@ public class Spawner : MonoBehaviour
     public GameObject enemy2;
     public GameObject enemy3;
 
-    // individual decoration counters;
-   // private int decoration1Count;
-    //private int decoration2Count;
-   // private int decoration3Count;
-
-    // decoration GameObjects
-
-    //public GameObject decoration1;
-   // public GameObject decoration2;
-   // public GameObject decoration3;
-
-    // spawning
     private GameObject enemySpawnManager;
-   // private GameObject decorationSpawnManager;
 
     private void Start()
     {
@@ -47,27 +35,25 @@ public class Spawner : MonoBehaviour
         enemy2Count = difficultyScaler.enemy2Count;
         enemy3Count = difficultyScaler.enemy3Count;
 
-        // add together enemies to get total
-        currentTotalEnemyCount = enemy1Count + enemy2Count + enemy3Count;
-        Debug.Log($"{name} enemy count: {currentTotalEnemyCount}");
-
-        // get spawnManagers
+        // get spawnManager
         enemySpawnManager = GameObject.Find("EnemySpawnManager");
-       // decorationSpawnManager = GameObject.Find("DecorationSpawnManager");
 
-        // spawn enemies and decorations
+        // spawn enemies
         RandomizeEnemySpawns();
     }
 
     private void Update()
     {
-        if (currentTotalEnemyCount != 0) return;
+        // check current enemy count by doing a tag count
+        currentTotalEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
 
-        if (!roomCleared)
+        // room cleared logic
+        if (currentTotalEnemyCount !<= 0)
+            roomCleared = false;
+        if (currentTotalEnemyCount <= 0)
             roomCleared = true;
 
-        if (roomCleared)
-            readyToBeDestroyed = true;
+        readyToBeDestroyed = roomCleared;
     }
 
     public void RandomizeEnemySpawns()
@@ -90,51 +76,42 @@ public class Spawner : MonoBehaviour
             var randomChild =  enemySpawnManager.transform.GetChild(randomInt).gameObject;
             var randomChildTransform = randomChild.transform.position;
 
-            // can have an offset:
-            // var offset = Random.Range(0, 5f);
-            // add or minus from transform of randomChildTransform
+            // create and add random offsets to x and z values
+            var offset = Random.Range(-3f, 3f);
+            var offset2 = Random.Range(-3f, 3f);
+            var randomOffset = new Vector3(randomChildTransform.x + offset, randomChildTransform.y - 0.4f, randomChildTransform.z + offset2);
 
             // instantiate the enemy on that position
-            Instantiate(enemy, randomChildTransform, Quaternion.identity);
+            Instantiate(enemy, randomOffset, Quaternion.identity);
         }
     }
 
-   // public void RandomizeDecoSpawns()
-    //{
-        //decoration1Count = Random.Range(1, 5);
-       // decoration2Count = Random.Range(1, 3);
-        //decoration3Count = Random.Range(1, 2);
+    public void CheckIfCleared()
+    {
+        // prints enemy counts, keeping in mind that this method is called by enemies just
+        // before they're destroyed, meaning thar currentTotalEnemyCount hasn't been updated with their death
 
-        // can spawn any decoration based on their total count
-        //SpawnDecorationType(decoration1Count, decoration1);
-       // SpawnDecorationType(decoration2Count, decoration2);
-        //SpawnDecorationType(decoration3Count, decoration3);
-    //}
+        Debug.Log($"{name} has {(currentTotalEnemyCount - 1)} enemies left.");
 
-   // private void SpawnDecorationType(int decorationCount, GameObject decorationObject)
-   // {
-        // loop until it's reached decorationCount amount
-       // for (var i = 0; i <= decorationCount; i++)
-       // {
-           // var decoration = decorationObject;
+        if (currentTotalEnemyCount == 1)
+            Debug.Log($"{name} has been cleared of enemies");
+    }
 
-            // get a random child number, then a random child (a SpawnPoint), and its transform
-           // var randomInt = Random.Range(0, decorationSpawnManager.transform.childCount -1);
-           // var randomChild =  decorationSpawnManager.transform.GetChild(randomInt).gameObject;
-           // var randomChildTransform = randomChild.transform.position;
-
-            // can have an offset:
-            // var offset = Random.Range(0, 5f);
-            // add or minus from transform of randomChildTransform
-
-            // instantiate the decoration on that position
-           // Instantiate(decoration, randomChildTransform, Quaternion.identity);
-       // }
-    //}
 
     public void DestroyRoom()
     {
+        // starts countdown to destroy room if it's cleared
         if (readyToBeDestroyed)
-            Destroy(gameObject);
+            StartCoroutine(WaitToDestroy());
+    }
+
+    private IEnumerator WaitToDestroy()
+    {
+        Debug.Log($"{name} will be destroyed in 20 seconds - " + Time.time);
+
+        yield return new WaitForSeconds(20f);
+
+        Debug.Log($"{name} was destroyed at " + Time.time);
+        Destroy(gameObject);
     }
 }
