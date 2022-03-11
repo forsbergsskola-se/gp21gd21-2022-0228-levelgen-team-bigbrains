@@ -7,11 +7,13 @@ public class FirstPersonMove : MonoBehaviour
     public float speed = 10.0f;
     private float translation;
     private float straffe;
+    public bool running;
 
 
     void Start () {
         // turn off the cursor
         Cursor.lockState = CursorLockMode.Locked;
+        running = false;
     }
 
     // Update is called once per frame
@@ -20,7 +22,21 @@ public class FirstPersonMove : MonoBehaviour
         // You can furthor set it on Unity. (Edit, Project Settings, Input)
         translation = Input.GetAxis("Vertical") * speed * Time.deltaTime;
         straffe = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+
+        // hold shift to run
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            running = true;
+            translation = translation* 2;
+            straffe = straffe * 2;
+        }
+        else
+        {
+            running = false;
+        }
+
         transform.Translate(straffe, 0, translation);
+
 
        if (Input.GetKeyDown("escape")) {
             // turn on the cursor
